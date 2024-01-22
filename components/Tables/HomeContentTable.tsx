@@ -1,9 +1,11 @@
+// @ts-nocheck
 import { HOMECONTENT } from "@/types/homeContent";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const homeContent: HOMECONTENT[] = [
   {
@@ -58,9 +60,18 @@ const HomeContentTable: React.FC<HomeContentTable> = ({ title, data }) => {
   };
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-      <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-        {title}
-      </h4>
+      <div className="flex justify-between">
+          <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
+            {title}
+          </h4>
+
+          <Link
+            href={"/pages/home/add"}
+            className="mb-6 text-xl font-semibold text-black dark:text-white"
+          >
+            Add Content
+          </Link>
+        </div>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg mb-10">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

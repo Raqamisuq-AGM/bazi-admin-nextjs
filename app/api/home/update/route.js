@@ -9,7 +9,7 @@ export async function POST(request) {
 
   try {
     // Check if the agent with the provided ID exists
-    const existingAgent = await prisma.agent.findUnique({
+    const existingAgent = await prisma.homePage.findUnique({
       where: {
         id: id,
       },
@@ -20,7 +20,7 @@ export async function POST(request) {
     }
 
     // Update the agent with the provided ID
-    const updatedAgent = await prisma.agent.update({
+    const updatedAgent = await prisma.homePage.update({
       where: {
         id: id,
       },
