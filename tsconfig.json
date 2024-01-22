@@ -23,6 +23,12 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/api/agent/agent-count/[type]/route.js"
+, "app/api/agent/count/route.js", "app/api/agent/table/route.js", "app/api/agent/add/route.js"  ],
   "exclude": ["node_modules"]
 }
