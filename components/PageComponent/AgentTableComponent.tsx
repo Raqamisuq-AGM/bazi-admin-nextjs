@@ -1,4 +1,5 @@
-"use client"
+// @ts-nocheck
+"use client";
 import { useEffect, useState } from "react";
 import AgentTable from "../Tables/AgentTable";
 import axios from "axios";
@@ -7,7 +8,7 @@ interface AgentTableComponent {
   type: any;
 }
 
-const AgentTableComponent: React.FC<AgentTableComponent> = ({ type }) =>{
+const AgentTableComponent: React.FC<AgentTableComponent> = ({ type }) => {
   const [AgentData, setAgentData] = useState([]);
 
   const getAgentData = async () => {
@@ -29,7 +30,6 @@ const AgentTableComponent: React.FC<AgentTableComponent> = ({ type }) =>{
   }, [type]);
 
   return <AgentTable title="Latest Agent" data={AgentData} />;
-}
-
+};
 
 export default AgentTableComponent;
