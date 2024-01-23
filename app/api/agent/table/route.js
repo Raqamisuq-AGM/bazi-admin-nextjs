@@ -9,7 +9,17 @@ export async function POST(request) {
 
   try {
     // Fetch the count of super agents
-    const Agents = await prisma.agent.findMany();
+    let Agents;
+    if (body.type == "all") {
+      Agents = await prisma.agent.findMany();
+    } else {
+      Agents = await prisma.agent.findMany({
+        where: {
+          type: body.type,
+        },
+      });
+    }
+
     return NextResponse.json({ message: "success", data: Agents });
   } catch (error) {
     console.error(error);
