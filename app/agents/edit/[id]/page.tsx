@@ -1,109 +1,13 @@
-"use client";
+import EditAgentPageData from "@/components/PageComponent/EditAgentPageData";
 import React from "react";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Edit agent",
+  description: "",
+};
 
 const AgentEditPage: React.FC = () => {
-  return (
-    <>
-      <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
-        <div className="col-span-12 xl:col-span-12">
-          <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-            <form className="mb-5">
-                <div className="mb-5">
-                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Role Type</label>
-  <select id="countries" className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-
-    <option>Admin</option>
-    <option>Master Agent</option>
-    <option>Super Agent</option>
-    <option>Customer Service</option>
-  </select>
-                </div>
-              <div className="mb-5">
-                <label
-                  htmlFor="title"
-                  className="mb-3 block text-black dark:text-white"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  placeholder="title"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <label
-                  htmlFor="sub_title"
-                  className="mb-3 block text-black dark:text-white"
-                >
-                  Agent ID No
-                </label>
-                <input
-                  type="text"
-                  id="sub_title"
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  placeholder="sub title"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <label
-                  htmlFor="sub_title"
-                  className="mb-3 block text-black dark:text-white"
-                >
-                  Phone App Link
-                </label>
-                <input
-                  type="text"
-                  id="sub_title"
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  placeholder="sub title"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <label
-                  htmlFor="sub_title"
-                  className="mb-3 block text-black dark:text-white"
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="text"
-                  id="sub_title"
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  placeholder="sub title"
-                  required
-                />
-              </div>
-              <div className="mb-5">
-                <label
-                  htmlFor="sub_title"
-                  className="mb-3 block text-black dark:text-white"
-                >
-                  Complain Link
-                </label>
-                <input
-                  type="text"
-                  id="sub_title"
-                  className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  placeholder="sub title"
-                  required
-                />
-              </div>
-              <div className="mb-5">                
-                <button className="inline-flex mt-5 items-center justify-center rounded-md bg-black py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </>
-  );
+  return <EditAgentPageData />;
 };
 
 export default AgentEditPage;

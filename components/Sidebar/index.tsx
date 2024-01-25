@@ -3,6 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SidebarLinkGroup from "./SidebarLinkGroup";
 import Image from "next/image";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -10,6 +13,13 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const pathname = usePathname();
 
   const trigger = useRef<any>(null);
@@ -55,6 +65,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     }
   }, [sidebarExpanded]);
 
+  const logoutAdmin = () => {
+    Cookies.remove("baziAdm", { path: "" });
+    router.push("/login");
+  };
+
   return (
     <aside
       ref={sidebar}
@@ -68,7 +83,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           <Image
             width={176}
             height={32}
-            src={"/images/logo/logo.svg"}
+            src={"/images/logo/logo.png"}
             alt="Logo"
           />
         </Link>
@@ -170,7 +185,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 20 20"
-                          style={{ width:"18px" }}
+                          style={{ width: "18px" }}
                         >
                           <path
                             stroke="currentColor"
@@ -287,7 +302,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 16 20"
-                          style={{ width:"15px" }}
+                          style={{ width: "15px" }}
                         >
                           <path
                             stroke="currentColor"
@@ -392,7 +407,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 20 20"
-                          style={{ width:"18px" }}
+                          style={{ width: "18px" }}
                         >
                           <path
                             stroke="currentColor"
@@ -460,10 +475,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
               {/* <!-- Menu Item Logout --> */}
               <li>
-                <Link
-                  href="/logout"
+                <span
+                  onClick={() => logoutAdmin()}
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-                    pathname.includes("/logout") && "bg-graydark dark:bg-meta-4"
+                    pathname.includes("/logout") &&
+                    "bg-graydark dark:bg-meta-4 cursor-pointer"
                   }`}
                 >
                   <svg
@@ -472,7 +488,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 16 16"
-                    style={{ width:"18px" }}
+                    style={{ width: "18px" }}
                   >
                     <path
                       stroke="currentColor"
@@ -483,7 +499,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     />
                   </svg>
                   Logout
-                </Link>
+                </span>
               </li>
               {/* <!-- Menu Item Logout --> */}
             </ul>
