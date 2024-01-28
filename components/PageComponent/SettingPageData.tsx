@@ -5,8 +5,17 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function SettingPageData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [isAdding, setIsAdding] = useState(false);
   const [title, setTitle] = useState("");
   const [tagline, setTagline] = useState("");

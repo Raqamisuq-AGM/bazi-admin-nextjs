@@ -1,20 +1,27 @@
 "use client";
 import CustomToasterContainer from "../CustomToasterContainer/CustomToasterContainer";
 import axios from "axios";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function AddHomePageData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-  const router = useRouter();
 
   const AddAgent = async () => {
     setIsAdding(true);

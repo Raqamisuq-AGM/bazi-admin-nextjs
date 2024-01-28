@@ -2,8 +2,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import HomeContentTable from "../Tables/HomeContentTable";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function HomeTableComponent() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [HomeData, setHomeData] = useState([]);
 
   const getAgentData = async () => {

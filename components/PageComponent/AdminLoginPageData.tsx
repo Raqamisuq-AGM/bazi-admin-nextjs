@@ -1,19 +1,24 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomToasterContainer from "../CustomToasterContainer/CustomToasterContainer";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function AdminLoginPageData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (Cookies.get("baziAdm")) {
+      router.push("/");
+    }
+  });
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-
-  const router = useRouter();
 
   const AddAgent = async () => {
     if (!email && !password) {
