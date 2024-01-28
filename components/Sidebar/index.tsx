@@ -6,7 +6,6 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
-
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (arg: boolean) => void;
@@ -14,11 +13,32 @@ interface SidebarProps {
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const router = useRouter();
+  // useEffect(() => {
+  //   if (!Cookies.get("baziAdm")) {
+  //     router.push("/login");
+  //   }
+  // });
+
   useEffect(() => {
+    const { pathname } = router;
+
+    // Check if the current page is "forget-password" or starts with "forget-password/token"
+    if (
+      pathname === "/forget-password" ||
+      (pathname && pathname.startsWith("/forget-password/token")) ||
+      (pathname && pathname.startsWith("/forget-password/change-password"))
+    ) {
+      // Do something specific for the "forget-password" page or its subpages
+      // console.log("This is the forget-password page or its subpage.");
+      return;
+    }
+
+    // Check if the user is authenticated
     if (!Cookies.get("baziAdm")) {
+      // Redirect to the login page if not authenticated
       router.push("/login");
     }
-  });
+  }, [router]);
 
   const pathname = usePathname();
 

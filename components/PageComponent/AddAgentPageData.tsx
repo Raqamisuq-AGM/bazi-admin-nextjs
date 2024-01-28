@@ -19,38 +19,47 @@ export default function AddAgentPageData() {
   const router = useRouter();
 
   const AddAgent = async () => {
-    setIsAdding(true);
-    const response = await axios
-      .post("/api/agent/add", {
-        type: type,
-        name: name,
-        agentID: agentID,
-        rating: "7",
-        phoneAppLink: phoneLink,
-        phoneNumber: phoneNumber,
-        complainLink: complainLink,
-      })
-      .then(function (response) {
-        // console.log(response.data.data);
-        setIsAdding(false);
-        router.push("/agents/all-agent");
-        toast.success("agent added successfully", {
-          position: "bottom-left",
-          autoClose: 20000,
-          hideProgressBar: true,
-          pauseOnHover: true,
-        });
-      })
-      .catch(function (error) {
-        // console.log(error);
-        setIsAdding(false);
-        toast.error("Something went wrong! Please try again later.", {
-          position: "bottom-left",
-          autoClose: 20000,
-          hideProgressBar: true,
-          pauseOnHover: true,
-        });
+    if (!type) {
+      toast.error("please select agent role type", {
+        position: "bottom-left",
+        autoClose: 20000,
+        hideProgressBar: true,
+        pauseOnHover: true,
       });
+    } else {
+      setIsAdding(true);
+      const response = await axios
+        .post("/api/agent/add", {
+          type: type,
+          name: name,
+          agentID: agentID,
+          rating: "7",
+          phoneAppLink: phoneLink,
+          phoneNumber: phoneNumber,
+          complainLink: complainLink,
+        })
+        .then(function (response) {
+          // console.log(response.data.data);
+          setIsAdding(false);
+          router.push("/agents/all-agent");
+          toast.success("agent added successfully", {
+            position: "bottom-left",
+            autoClose: 20000,
+            hideProgressBar: true,
+            pauseOnHover: true,
+          });
+        })
+        .catch(function (error) {
+          // console.log(error);
+          setIsAdding(false);
+          toast.error("Something went wrong! Please try again later.", {
+            position: "bottom-left",
+            autoClose: 20000,
+            hideProgressBar: true,
+            pauseOnHover: true,
+          });
+        });
+    }
   };
 
   return (
@@ -72,6 +81,7 @@ export default function AddAgentPageData() {
                 value={type}
                 disabled={isAdding}
               >
+                <option value={""}>Select Role</option>
                 <option value={"admin"}>Admin</option>
                 <option value={"master"}>Master Agent</option>
                 <option value={"super"}>Super Agent</option>
