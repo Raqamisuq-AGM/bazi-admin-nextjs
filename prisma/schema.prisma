@@ -54,6 +54,7 @@ model Admin {
   title     String
   tagline   String
   email     String   @unique
+  token     String   @unique
   keyword   String
   about     String
   password  String
