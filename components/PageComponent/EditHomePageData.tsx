@@ -11,10 +11,16 @@ import Cookies from "js-cookie";
 
 const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
 export default function EditHomePageData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-  const router = useRouter();
 
   const AddAgent = async () => {
     setIsAdding(true);

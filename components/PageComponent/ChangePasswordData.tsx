@@ -1,12 +1,20 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
 import CustomToasterContainer from "../CustomToasterContainer/CustomToasterContainer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function ChangePasswordData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [isAdding, setIsAdding] = useState(false);
   const [password, setPassword] = useState("");
   const [cnfPassword, setCnfPassword] = useState("");

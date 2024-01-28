@@ -1,13 +1,22 @@
 "use client";
 
 import axios from "axios";
-import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomToasterContainer from "../CustomToasterContainer/CustomToasterContainer";
+
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function AddAgentPageData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [type, setType] = useState("");
   const [name, setName] = useState("");
   const [agentID, setID] = useState("");
@@ -15,8 +24,6 @@ export default function AddAgentPageData() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [complainLink, setComplainLink] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-
-  const router = useRouter();
 
   const AddAgent = async () => {
     if (!type) {

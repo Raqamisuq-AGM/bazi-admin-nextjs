@@ -1,6 +1,6 @@
 "use client";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomToasterContainer from "../CustomToasterContainer/CustomToasterContainer";
@@ -8,10 +8,15 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 export default function ForgetPasswordPageData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (Cookies.get("baziAdm")) {
+      router.push("/");
+    }
+  });
+
   const [email, setEmail] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-
-  const router = useRouter();
 
   const AddAgent = async () => {
     if (!email) {

@@ -9,6 +9,13 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 export default function EditAgentPageData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [type, setType] = useState("");
   const [name, setName] = useState("");
   const [agentID, setID] = useState("");
@@ -16,8 +23,6 @@ export default function EditAgentPageData() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [complainLink, setComplainLink] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-
-  const router = useRouter();
 
   const AddAgent = async () => {
     setIsAdding(true);

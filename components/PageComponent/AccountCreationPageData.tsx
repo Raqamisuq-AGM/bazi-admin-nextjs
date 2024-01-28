@@ -1,15 +1,24 @@
 "use client";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import CustomToasterContainer from "../CustomToasterContainer/CustomToasterContainer";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 const QuillEditor = dynamic(() => import("react-quill"), { ssr: false });
 
 export default function AccountCreationPageData() {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [title, setTitle] = useState("");
   const [subTitle, setSubTitle] = useState("");
   const [content, setContent] = useState("");

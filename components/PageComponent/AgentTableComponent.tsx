@@ -1,14 +1,23 @@
 // @ts-nocheck
 "use client";
-import { useEffect, useState } from "react";
 import AgentTable from "../Tables/AgentTable";
 import axios from "axios";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 interface AgentTableComponent {
   type: any;
 }
 
 const AgentTableComponent: React.FC<AgentTableComponent> = ({ type }) => {
+  const router = useRouter();
+  useEffect(() => {
+    if (!Cookies.get("baziAdm")) {
+      router.push("/login");
+    }
+  });
+
   const [AgentData, setAgentData] = useState([]);
 
   const getAgentData = async () => {
