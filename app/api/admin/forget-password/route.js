@@ -1,23 +1,37 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcrypt";
+import nodemailer from "nodemailer";
 
 const prisma = new PrismaClient();
-
-// Function to compare passwords using bcrypt
-const comparePasswords = async (inputPassword, hashedPassword) => {
-  const match = await bcrypt.compare(inputPassword, hashedPassword);
-  return match;
-};
 
 // Function to generate a random 4-digit token
 const generateToken = () => {
   return Math.floor(1000 + Math.random() * 9000).toString();
 };
 
+// Function to send email using nodemailer
+const sendEmail = async (recieverEmail, token) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "shazibahmed101@gmail.com", // Your Gmail email address
+      pass: "nydvsaympnzerhzt", // Your Gmail password
+    },
+  });
+
+  const mailOptions = {
+    from: "shazibahmed101@gmail.com", // Sender's email address
+    to: recieverEmail, // Recipient's email address
+    subject: "Your Verification Token", // Email subject
+    text: `Your verification token is: ${token}`, // Email body
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
 // Example usage of Prisma Client in Next.js API route
 export async function POST(request) {
-  const { email, password } = await request.json();
+  const { email } = await request.json();
 
   try {
     // Retrieve the user from the database based on the email
@@ -55,6 +69,9 @@ export async function POST(request) {
         token: token,
       },
     });
+
+    // Send email with the token
+    await sendEmail(email, token);
 
     return NextResponse.json({ message: "success", data: { user, token } });
   } catch (error) {
