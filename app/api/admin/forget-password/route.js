@@ -14,13 +14,13 @@ const sendEmail = async (recieverEmail, token) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "shazibahmed101@gmail.com", // Your Gmail email address
-      pass: "nydvsaympnzerhzt", // Your Gmail password
+      user: "bazibet365@gmail.com", // Your Gmail email address
+      pass: "rmyxfrhupbmhxmxe", // Your Gmail password
     },
   });
 
   const mailOptions = {
-    from: "shazibahmed101@gmail.com", // Sender's email address
+    from: "bazibet365@gmail.com", // Sender's email address
     to: recieverEmail, // Recipient's email address
     subject: "Your Verification Token", // Email subject
     text: `Your verification token is: ${token}`, // Email body
